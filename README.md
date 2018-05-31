@@ -1,0 +1,5 @@
+# Loading Multiple Versions of Concrete class at Runtime
+
+## Learning
+* Did multiple tries and learned that to use multiple versions of concrete classes at runtime it must be wrapped by some another class and then we can load that another class at runtime via the use of interface it implements. So basically interface is must to use multiple versions of any class.
+* Here the ConcreteClass is wrapped by its user class DataAccessLayer which implements the interface IFace. Then at runtime the UI class loads the multiple versions of ConcreteClass via DataAccessLayer (same implementation for all versions). But there is a catch note that the class file of DataAccessLayer is moved into 'folder' so that it is not loaded by default classloader. That is we need to ensure that the wrapper class (here DataAccessLayer) must not fall in the default classpath of the user class (here UI), otherwise it will be loaded by default classloader and thus we won't be able to load DataAccessLayer multiple times with multiple versions ConcreteClass via the help of multiple instances of classloaders (here classLoaderForV1 and classLoaderForV2).
